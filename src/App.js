@@ -2,8 +2,6 @@ import './App.css';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// Map using Object.keys.map to generate select options
-
 function App() {
 
   const [states, setStates] = useState([]);
@@ -21,8 +19,6 @@ function App() {
   
   useEffect(() => {
     fetchData();
-    console.log(states)
-    console.log(occupations)
   }, []);
 
   return (
@@ -30,24 +26,36 @@ function App() {
       <form id="createNewUserForm" action="https://frontend-take-home.fetchrewards.com/form" method="POST">
         <h3>Create New User</h3>
         <div id="userFullName">
-          <label for="name">Full Name:</label>
-          <input type="text" name="name"></input>
+          <label htmlFor="name">Full Name:</label>
+          <input type="text" name="name" required></input>
         </div>
         <div id="userEmail">
-          <label for="email">Email:</label>
-          <input type="text" name="email"></input>
+          <label htmlFor="email">Email:</label>
+          <input type="text" name="email" required></input>
         </div>
         <div id="userPassword">
-          <label for="password">Password:</label>
-          <input type="text" name="password"></input>
+          <label htmlFor="password">Password:</label>
+          <input type="text" name="password" required></input>
         </div>
         <div id="userOccupation">
-          <label for="occupation">Occupation:</label>
-          <select name="occupation"></select>
+          <label htmlFor="occupation">Occupation:</label>
+          <select name="occupation" required>
+          { occupations.map((occupation, i) => (
+              <option key={i} value={occupation}>
+                {occupation}
+              </option>
+          ))}
+          </select>
         </div>
         <div id="userState">
-          <label for="state">State:</label>
-          <select name="state"></select>
+          <label htmlFor="state">State:</label>
+          <select name="state" required>
+            { states.map((state, i) => (
+              <option key={i} value={state.name}>
+                {state.name}
+              </option>
+            ))}
+          </select>
         </div>
       </form>
     </div>
