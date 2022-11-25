@@ -1,6 +1,6 @@
 # FrontEnd-Takehome
 
-This user creation form was built using react.js and styled using bootstrap.
+This user creation form was built using react.js and styled using bootstrap.  It features a render test and snapshot test for the main component.
 
 ## Getting Started
 
