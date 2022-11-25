@@ -1,3 +1,5 @@
 .CreateUserForm {
     text-align: center;
+    background: linear-gradient(#1f2d47, #35577e);
+    min-height: 100vh;
   }

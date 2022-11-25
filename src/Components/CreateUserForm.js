@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios'
 import SuccessBanner from './SuccessBanner';
-import ErrorBanner from './ErrorBanner'
+import ErrorBanner from './ErrorBanner';
+import './CreateUserForm.css';
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 function CreateUserForm() {
 
@@ -47,69 +49,82 @@ function CreateUserForm() {
   }, []);
 
   return (
-    <div className="CreateUserForm">
-      {success && <SuccessBanner credentials = {credentials}/>}
-      {failure.error && <ErrorBanner failure = {failure}/>}
-      <form id="createNewUserForm" onSubmit={handleSubmit}>
+    <div data-testid='createUserForm' className="CreateUserForm">
+      {success && <SuccessBanner className='banner' credentials={credentials} />}
+      {failure.error && <ErrorBanner className='banner' failure={failure} />}
+      <div id='formContent'>
+
         <h3>Create New User</h3>
-        <div id="userFullName">
-          <label htmlFor="name">Full Name:</label>
-          <input 
-          type="text" 
-          name="name" 
-          value={credentials.name} 
-          required 
-          onChange={e => setCredentials({ ...credentials, name: e.target.value })}>
-          </input>
+        <div id='userFormContainer'>
+          <form id="createNewUserForm" onSubmit={handleSubmit}>
+
+            <div className='formElements' id="userFullName">
+              <label htmlFor="name">Full Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={credentials.name}
+                required
+                onChange={e => setCredentials({ ...credentials, name: e.target.value })}>
+              </input>
+            </div>
+
+            <div className='formElements' id="userEmail">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={credentials.email}
+                required
+                onChange={e => setCredentials({ ...credentials, email: e.target.value })}>
+              </input>
+            </div>
+
+            <div className='formElements' id="userPassword">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={credentials.password}
+                required
+                onChange={e => setCredentials({ ...credentials, password: e.target.value })}>
+              </input>
+            </div>
+
+            <div className='formElements' id="userOccupation">
+              <label htmlFor="occupation">Occupation:</label>
+              <select id="occupation" defaultValue={occupations[0]} required onChange={e => setCredentials({ ...credentials, occupation: e.target.value })}>
+                {occupations.map((occupation, i) => (
+                  <option
+                    key={i}
+                    value={occupation}
+                  >
+                    {occupation}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className='formElements' id="userState">
+              <label htmlFor="state">State:</label>
+              <select id="state" defaultValue={states[0]} required onChange={e => setCredentials({ ...credentials, state: e.target.value })}>
+                {states.map((state, i) => (
+                  <option
+                    key={i}
+                    value={state.name}
+                  >
+                    {state.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <Button id='submitBtn' value="Submit" type="submit">
+              Submit
+            </Button>
+          </form>
         </div>
-        <div id="userEmail">
-          <label htmlFor="email">Email:</label>
-          <input 
-          type="text" 
-          name="email" 
-          value={credentials.email} 
-          required 
-          onChange={e => setCredentials({ ...credentials, email: e.target.value })}>
-          </input>
-        </div>
-        <div id="userPassword">
-          <label htmlFor="password">Password:</label>
-          <input 
-          type="password" 
-          name="password" 
-          value={credentials.password} 
-          required
-          onChange={e => setCredentials({ ...credentials, password: e.target.value })}>
-          </input>
-        </div>
-        <div id="userOccupation">
-          <label htmlFor="occupation">Occupation:</label>
-          <select id="occupation" defaultValue={occupations[0]} required onChange={e => setCredentials({ ...credentials, occupation: e.target.value })}>
-          { occupations.map((occupation, i) => (
-              <option 
-              key={i} 
-              value={occupation} 
-              >
-                {occupation}
-              </option>
-          ))}
-          </select>
-        </div>
-        <div id="userState">
-          <label htmlFor="state">State:</label>
-          <select id="state" defaultValue={states[0]} required onChange={e => setCredentials({ ...credentials, state: e.target.value })}>
-            { states.map((state, i) => (
-              <option 
-              key={i} 
-              value={state.name}
-              >
-                {state.name}
-              </option>
-            ))}
-          </select>
-          <input type="submit" value="Submit"></input>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

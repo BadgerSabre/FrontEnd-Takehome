@@ -1,0 +1,25 @@
+#userFormContainer {
+    display: flex;
+    /* border: 1px red solid; */
+    justify-content: center;
+}
+
+.formElements {
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    margin-top: 1em;
+    /* border: 1px red solid; */
+}
+
+input, select {
+    margin-left: .5em;
+}
+
+#submitBtn {
+    margin-top: 1em;
+}
+
+h3, label {
+    color: rgba(238, 241, 247, 0.9);
+}
